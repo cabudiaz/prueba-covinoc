@@ -4,3 +4,5 @@ export interface TaskData {
     title: string;
     state: boolean;
   }
+
+  export interface TaskDataList extends Array<TaskData>{}

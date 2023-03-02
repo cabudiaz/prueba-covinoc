@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task.service';
-import { TaskData } from 'src/app/core/models/task.model';
+import { TaskData, TaskDataList } from 'src/app/core/models/task.model';
 
 
 
@@ -27,13 +27,13 @@ export class ListTaskComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  tasksList: TaskData[] 
+  tasksList: TaskDataList 
 
   ngOnInit(): void {
 
     this.taskService.getTask().subscribe(
       {
-        next: (result:any): void => {
+        next: (result:TaskDataList): void => {
           this.tasksList = result
           console.log(this.tasksList);
 
