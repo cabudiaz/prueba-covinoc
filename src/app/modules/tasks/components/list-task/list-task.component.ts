@@ -3,13 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TaskService } from 'src/app/services/task.service';
-
-/* export interface UserData {
-  id: string;
-  name: string;
-  progress: string;
-  fruit: string;
-} */
+import { TaskData } from 'src/app/core/models/task.model';
 
 
 
@@ -20,17 +14,12 @@ import { TaskService } from 'src/app/services/task.service';
   templateUrl: './list-task.component.html',
   styleUrls: ['./list-task.component.sass']
 })
-export class ListTaskComponent {
-
-  constructor(private taskService: TaskService) {
-    // Create 100 users
-    /*  const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1)); */
-
-
-  }
+export class ListTaskComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['id', 'title', 'state', 'delete'];
-  dataSource: any = []
+  dataSource: MatTableDataSource<TaskData>
+
+  constructor(private taskService: TaskService) { }
 
 
   /*  @Input ("tasksList") tasksList:[] = [] */
@@ -38,21 +27,16 @@ export class ListTaskComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  tasksList: any = []
-
-
-
-
+  tasksList: TaskData[] 
 
   ngOnInit(): void {
 
     this.taskService.getTask().subscribe(
       {
-        next: (result) => {
+        next: (result:any): void => {
           this.tasksList = result
           console.log(this.tasksList);
 
-          // Assign the data to the data source for the table to render
           this.dataSource = new MatTableDataSource(this.tasksList);
 
           this.dataSource.paginator = this.paginator;
@@ -77,7 +61,6 @@ export class ListTaskComponent {
   }
 
   updateTask(id: string, e: any) {
-
 
     this.taskService.updateTask(id, e.checked).subscribe(
       {
