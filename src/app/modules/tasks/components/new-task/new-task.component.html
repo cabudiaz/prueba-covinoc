@@ -1,0 +1,36 @@
+<div class="container-fluid bg-color">
+    <div class="row">
+        <div class="container-new-task mx-auto d-block">
+            <div class="new-task-title">
+                <div class="d-inline-block me-2 mb-4">
+                    <i class="fa-solid fa-plus "></i>
+                </div>
+                <p class="d-inline-block">Nueva tarea</p>
+            </div>
+
+            <form #f='ngForm' (ngSubmit)="createTask(f)">
+                <div class="row">
+                    <div class="col-6">
+
+                        <mat-form-field color="warn" appearance="fill">
+                            <mat-label>Título</mat-label>
+                            <input required ngModel name="title" matInput placeholder="Ingrese título" value="Ingrese título">
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-3">
+                        <mat-checkbox ngModel name="state" labelPosition="before" class="check-margin">Tarea
+                            completada</mat-checkbox>
+                    </div>
+
+                    <div class="col-3">
+
+                        <button mat-raised-button>
+                            <i class="fa-solid fa-plus "></i>GUARDAR TAREA
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
